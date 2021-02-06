@@ -6,14 +6,30 @@ In these examples we'll use the default Knative eventing broker to send events t
 
 ## Environment Setup
 
-Make sure you're connected to an OpenShift cluster.
+Make sure you're connected to an OpenShift or Kubernetes cluster.
 
-You need the following operators installed in global mode (you can use OperatorHub for all them):
+- OpenShift Serverless or Knative Eventing
 
-- OpenShift Serverless
-- Knative Eventing
+I created a local cluster and install Knative using https://konk.dev
+```bash
+curl -sfL get.konk.dev | sh
+```
+
 - [Camel K](https://github.com/apache/camel-k)
+
+I installed this way
+```bash
+REGISTRY_NAMESPACE=csantanapr
+kamel install --registry-auth-username=${REGISTRY_NAMESPACE} --registry-auth-password=<dockerpassword> --registry docker.io --organization ${REGISTRY_NAMESPACE}
+```
+
 - [Knative Apache Camel Sources](https://github.com/knative-sandbox/eventing-camel)
+
+I installed this way
+```
+kubectl apply -f https://github.com/knative-sandbox/eventing-camel/releases/download/v0.20.0/camel.yaml
+```
+
 
 After you've installed the required operators, you can create a sample project with the command:
 
